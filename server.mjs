@@ -1,36 +1,39 @@
 import express from 'express';
-import { Configuration, OpenAIApi } from 'openai';
-import cors from 'cors';
+import fetch from 'node-fetch';
 
 const app = express();
-app.use(cors());
+const PORT = process.env.PORT || 3001;
+const OPENAI_API_KEY = 'sk-c-iuwHRAW6A6e-IVXIEdwKJIEz5yd9jSAanqGsx-6yT3BlbkFJj5rbPwcUQfvAxWIAMXol9avS-FmgYhagI1XQh9YDcA';
+
 app.use(express.json());
 
-// إعداد OpenAI API
-const configuration = new Configuration({
-    apiKey: 'YOUR_OPENAI_API_KEY'
-});
-const openai = new OpenAIApi(configuration);
-
-// مسار لمعالجة استفسارات المستخدم
 app.post('/chat', async (req, res) => {
     const { message } = req.body;
+
     try {
-        const response = await openai.createChatCompletion({
-            model: 'gpt-3.5-turbo',
-            messages: [{ role: 'user', content: message }],
+        const response = await fetch('https://api.openai.com/v1/engines/gpt-3.5-turbo/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${OPENAI_API_KEY}`
+            },
+            body: JSON.stringify({
+                model: "gpt-3.5-turbo",
+                messages: [{ role: "user", content: message }],
+                max_tokens: 100
+            })
         });
 
-        const reply = response.data.choices[0].message.content;
+        const data = await response.json();
+        const reply = data.choices[0].message.content;
         res.json({ reply });
+
     } catch (error) {
         console.error('Error:', error);
-        res.status(500).send('حدث خطأ أثناء الاتصال بـ ChatGPT');
+        res.status(500).json({ error: 'حدث خطأ في استجابة ChatGPT.' });
     }
 });
 
-// بدء الخادم على المنفذ 3001
-const PORT = 3001;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
