@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مستشار الحياة الرقمية الذكي</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="/myApp2/styles.css">
+    <script src="/myApp2/script.js" defer></script>
 </head>
 <body>
     <header>
@@ -59,7 +59,7 @@
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker
-            .register('/service-worker.js')
+            .register('/myApp2/service-worker.js')  <!-- تأكد من تعديل المسار هنا أيضاً -->
             .then((registration) => {
               console.log('Service Worker registered with scope:', registration.scope);
             })
