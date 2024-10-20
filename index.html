@@ -59,7 +59,7 @@
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker
-            .register('/myApp2/service-worker.js')  <!-- تأكد من تعديل المسار هنا أيضاً -->
+            .register('/myApp2/service-worker.js')  // تأكد من أن المسار صحيح بالنسبة لـ GitHub Pages
             .then((registration) => {
               console.log('Service Worker registered with scope:', registration.scope);
             })
