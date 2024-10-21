@@ -29,30 +29,6 @@ section {
     transition: all 0.3s ease;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-label, input, select, button {
-    padding: 12px;
-    font-size: 1.1em;
-    border-radius: 5px;
-}
-
-button {
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #388e3c;
-}
-
 #chatbot {
     position: fixed;
     bottom: 20px;
