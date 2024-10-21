@@ -1,13 +1,10 @@
 require('dotenv').config();
-
-const apiKey = process.env.OPENAI_API_KEY;
-
-import express from 'express';
-import fetch from 'node-fetch';
+const express = require('express');
+const fetch = require('node-fetch');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-const OPENAI_API_KEY = 'sk-c-iuwHRAW6A6e-IVXIEdwKJIEz5yd9jSAanqGsx-6yT3BlbkFJj5rbPwcUQfvAxWIAMXol9avS-FmgYhagI1XQh9YDcA';
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY; // استخدام المفتاح من .env
 
 app.use(express.json());
 
@@ -15,7 +12,7 @@ app.post('/chat', async (req, res) => {
     const { message } = req.body;
 
     try {
-        const response = await fetch('https://api.openai.com/v1/engines/gpt-3.5-turbo/completions', {
+        const response = await fetch('https://api.openai.com/v1/chat/completions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
