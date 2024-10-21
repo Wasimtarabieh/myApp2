@@ -1,3 +1,7 @@
+require('dotenv').config();
+
+const apiKey = process.env.OPENAI_API_KEY;
+
 import express from 'express';
 import fetch from 'node-fetch';
 
