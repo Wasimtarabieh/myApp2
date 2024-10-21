@@ -1,18 +1,14 @@
-function generateReport() {
+async function generateReport() {
     const usageTime = document.getElementById('usageTime').value;
     const stressLevel = document.getElementById('stressLevel').value;
     const goal = document.getElementById('goal').value;
 
-    if (!usageTime || !stressLevel || !goal) {
-        alert("يرجى ملء جميع الحقول.");
-        return;
-    }
+    let report = `إليك تقريرك الذكي:\n`;
+    report += `وقت الاستخدام اليومي: ${usageTime} ساعات.\n`;
+    report += `مستوى التوتر: ${stressLevel}.\n`;
+    report += `هدفك: ${goal}.`;
 
-    let report = `ساعات الشاشة اليومية: ${usageTime}\n`;
-    report += `مستوى التوتر: ${stressLevel}\n`;
-    report += `هدفك لتحسين نمط حياتك: ${goal}\n`;
-
-    document.getElementById('reportText').textContent = report;
+    document.getElementById('reportText').innerText = report;
     document.getElementById('report').style.display = 'block';
 }
 
